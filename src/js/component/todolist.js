@@ -7,6 +7,7 @@ export function TodoList() {
 		setT(e.target.value);
 		if (task != "null") {
 			setTask(newTask => [...newTask, t]);
+			setT("");
 		}
 	};
 
@@ -25,6 +26,7 @@ export function TodoList() {
 								e.key === "Enter" ? handleChange(e) : ""
 							}
 							onChange={e => setT(e.target.value)}
+							value={t}
 						/>
 					</li>
 
