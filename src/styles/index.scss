@@ -18,3 +18,17 @@
 .taskbox{
     width: 100%;
 }
+
+.close {
+  display: none;
+}
+
+.task:hover + .close {
+  display: block;
+  color: red;
+}
+
+ul li:hover .close {
+  display: block;
+}
+

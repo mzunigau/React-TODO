@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 
 export function TodoList() {
-	const [t, setT] = useState();
-	const [task, setTask] = useState([]);
-	const handleChange = e => {
-		setT(e.target.value);
-		if (task != "null") {
-			setTask(newTask => [...newTask, t]);
-			setT("");
+	const [task, setTask] = useState();
+	const [todoList, setTodoList] = useState([]);
+	const handleChange = () => {
+		//setTask(e.target.value);
+		if (todoList != "null") {
+			setTodoList(newTask => [...newTask, task]);
+			setTask("");
 		}
+	};
+
+	const deleteTask = id => {
+		todoList.splice(id, 1);
+		setTodoList([...todoList]);
 	};
 
 	return (
@@ -23,20 +28,27 @@ export function TodoList() {
 							className="taskbox"
 							placeholder="Escribe tus tareas"
 							onKeyPress={e =>
-								e.key === "Enter" ? handleChange(e) : ""
+								e.key === "Enter" ? handleChange() : ""
 							}
-							onChange={e => setT(e.target.value)}
-							value={t}
+							onChange={e => setTask(e.target.value)}
+							value={task}
 						/>
 					</li>
 
-					{task.map((result, i) => (
-						<li className="list-group-item" key={i}>
+					{todoList.map((result, i) => (
+						<li className="list-group-item task" key={i}>
 							{result}
+							<div
+								className="close"
+								onClick={() => deleteTask(result.id)}>
+								&times;
+							</div>
 						</li>
 					))}
 
-					<li className="list-group-item">Tareas {task.length}</li>
+					<li className="list-group-item">
+						Tareas {todoList.length}
+					</li>
 				</ul>
 			</div>
 		</div>
